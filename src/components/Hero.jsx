@@ -2,12 +2,10 @@ import React from 'react'
 
 const Hero = () => {
   return (
-    <section>
-        <div className="hero">
-            <h1>Công cụ tính Thuế thu nhập cá nhân chuẩn 2026</h1>
-            <h2>Cập nhật mới nhất: 27/04/2026</h2>
-        </div>
-    </section>
+    <header className="text-center p-10 font-bold text-(--dark-blue) shadow-xl">
+        <h1 className='mb-5 text-base md:text-4xl'>Công cụ tính Thuế thu nhập cá nhân chuẩn 2026</h1>
+        <h2 className='text-sm md:text-xl'>Cập nhật mới nhất: 27/04/2026</h2>
+    </header>
   )
 }
 

@@ -4,4 +4,8 @@
 @theme {
     --font-sans: "Roboto", sans-serif;
     --font-display: "Roboto", sans-serif;
+    --dark-blue: #112d4e;
+    --blue: #3f72af;
+    --gray: #dbe2ef;
+    --white: #f9f7f7;
 }
