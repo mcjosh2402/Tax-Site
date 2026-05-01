@@ -4,21 +4,27 @@ import { FaMoneyBillAlt } from 'react-icons/fa'
 const FormCards = () => {
     const [salary, setSalary] = useState() // default number for salary form
 
+    const thousandSeperator = (e) => {
+        const input = e.target.value.replace(/\D/g, "")
+        const formattedInput = Number(input).toLocaleString()
+        setSalary(input === "" ? "" : formattedInput)
+    }
+
   return (
     <section>
         <div className='my-20 mx-auto w-3/4 lg:w-2/3 border'>
             <form className="mx-5 my-4 space-y-6">
                 <div className="flex flex-col gap-2">
                     <label htmlFor="salary" className='text-base lg:text-xl font-bold'>Lương gộp hàng tháng (Gross)</label>
-                    <div className="border rounded-xl flex w-full lg:w-2/3 items-center">
+                    <div className="border rounded-lg flex w-full lg:w-1/2 items-center">
                         <FaMoneyBillAlt className="inline shrink-0 text-base lg:text-xl text-(--dark-blue) my-auto mx-2"/>
                         <input 
-                            type="number" 
+                            type="text" 
                             id="salary" 
                             className='rounded-lg flex-1 min-w-0 p-1 text-xl text-right focus:outline-none
                                        [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none' // hide arrowkeys
                             value={salary}
-                            onChange={(e) => setSalary(e.target.value)}
+                            onChange={thousandSeperator}
                         /> 
                         <span className="mx-2 inline-block shrink-0 pointer-events-none font-semibold opacity-50">VND</span>
                     </div>
