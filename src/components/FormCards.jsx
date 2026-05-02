@@ -2,90 +2,116 @@ import React from 'react'
 import { useState } from 'react'
 import { FaMoneyBillAlt } from 'react-icons/fa'
 const FormCards = () => {
-    const [salary, setSalary] = useState() // default number for salary form
+    const [salary, setSalary] = useState("")              // default value
+    const [insurance, setInsurance] = useState("")
+    const [isEnabled, setIsEnabled] = useState(false)
 
-    const thousandSeperator = (e) => {
-        const input = e.target.value.replace(/\D/g, "") // regex auto delete non number characters
-        const formattedInput = Number(input).toLocaleString() 
-        setSalary(input === "" ? "" : formattedInput)
+    const thousandSeparator = (setValue) => (e) => {
+      const input = e.target.value.replace(/\D/g, '')
+      const formatted = input === '' ? '' : Number(input).toLocaleString()
+      setValue(formatted);
     }
 
-  return (
-    <section>
-        <div className='my-20 mx-auto w-3/4 lg:w-2/3 border'>
-            <form className="mx-5 my-4 space-y-6" autoComplete="off">
-                <div className="flex flex-col gap-2">
-                    <label htmlFor="salary" className='text-base lg:text-xl font-bold'>Lương gộp hàng tháng (Gross)</label>
-                    <div className="border rounded-lg flex w-full lg:w-1/2 items-center">
-                        <FaMoneyBillAlt className="inline shrink-0 text-base lg:text-xl text-(--dark-blue) my-auto mx-2"/>
-                        <input 
-                            type="text" 
-                            id="salary" 
-                            className='rounded-lg flex-1 min-w-0 p-1 text-xl text-right focus:outline-none
-                                       [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none' // hide arrowkeys
-                            value={salary}
-                            onChange={thousandSeperator}
-                        /> 
-                        <span className="mx-2 inline-block shrink-0 pointer-events-none font-semibold opacity-50">VND</span>
-                    </div>
-                </div>
+	return (
+		<section>
+			<div className='my-15 mx-auto w-3/4 lg:w-2/3 border'>
+				<form className="mx-5 my-4 space-y-6" autoComplete="off">
+					{/* Salary input */}
+					<div className="flex flex-col gap-2">
+						<label htmlFor="salary" className='text-base lg:text-xl font-bold'>Lương gộp hàng tháng (Gross)</label>
+						<div className="border rounded-lg flex w-full lg:w-1/2 items-center">
+							<FaMoneyBillAlt className="inline shrink-0 text-base lg:text-xl text-(--dark-blue) my-auto mx-2"/>
+							<input 
+								type="text" 
+								id="salary" 
+								className='rounded-lg flex-1 min-w-0 p-1 text-xl text-right focus:outline-none
+										[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none' // hide arrowkeys
+								value={salary}
+								onChange={thousandSeparator(setSalary)}
+							/> 
+							<span className="mx-2 inline-block shrink-0 pointer-events-none font-semibold opacity-50">VND</span>
+						</div>
+					</div>
 
-                <div className="flex flex-col gap-2">
-                    <label htmlFor="baohiem" className='text-base lg:text-xl font-bold'>Mức lương đóng bảo hiểm</label>
-                    
-                    <div className="flex items-center gap-2">
-                        <input 
-                            type="radio" 
-                            id="luongGross" 
-                            name="baohiem" 
-                            className='mr-2' 
-                            defaultChecked
-                        />
-                        <label htmlFor='luongGross' className='text-base lg:text-xl'>Sử dụng lương gộp</label>
-                    </div>
-                    
-                    <div className="flex flex-col gap-2">
-                      <div className="flex items-center gap-2">
-                        <input type="radio" id="luongCustom" name="baohiem" className='mr-2'/>
-                        <label htmlFor='luongCustom' className='text-base lg:text-xl'>Khác</label>
-                      </div>
-                        <input 
-                            type="number" 
-                            className='border block rounded-lg p-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
-                        />
-                    </div>
-                </div>
-                    
-                <div className="flex flex-col gap-2">
-                    <label className='text-base lg:text-xl font-bold mr-5'>Vùng kinh tế</label>
-                    <select className='text-base lg:text-xl border rounded-lg p-1'>
-                        <option>Vùng I</option>
-                        <option>Vùng II</option>
-                        <option>Vùng III</option>
-                        <option>Vùng IV</option>
-                    </select>
-                </div>
+					{/* Insurance fields */}
+					<div className="flex flex-col gap-2">
+						<label htmlFor="baohiem" className='text-base lg:text-xl font-bold'>Mức lương đóng bảo hiểm</label>
+						
+						<div className="flex items-center gap-2">
+							<input 
+								type="radio" 
+								id="luongGross" 
+								name="baohiem" 
+								className='mr-2' 
+								onChange={(e) => {setIsEnabled(!isEnabled)}}
+								defaultChecked
+							/>
+							<label htmlFor='luongGross' className='text-base lg:text-xl'>Sử dụng lương gộp</label>
+						</div>
+						
+						<div className="flex flex-col gap-2">
+							<div className="flex items-center gap-2">
+								<input 
+									type="radio" 
+									id="luongCustom" 
+									name="baohiem" 
+									className='mr-2'
+									onChange={(e) => {setIsEnabled(!isEnabled)}}
+								/>
+								<label htmlFor='luongCustom' className='text-base lg:text-xl'>Khác</label>
+							</div>
 
-                <div className="flex flex-col gap-2">
-                    <label htmlFor="salary" className='text-base lg:text-xl font-bold'>Số người phụ thuộc</label>
-                    <input 
-                        type="number" 
-                        // id
-                        className='border rounded-lg p-1 w-fit lg:w-auto [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
-                    />
-                </div>
+							<div className={`border rounded-lg flex w-full lg:w-1/2 items-center
+								transition-all ${!isEnabled ? "bg-(--gray) opacity-70 pointer-events-none select-none" : ""}`}> {/* toggle div on/off */}
+								         
+								<FaMoneyBillAlt className="inline shrink-0 text-base lg:text-xl text-(--dark-blue) my-auto mx-2"/>
+								<input 
+									type="text" 
+									id="insurance" 
+									disabled={!isEnabled}
+									className='rounded-lg flex-1 min-w-0 p-1 text-xl text-right
+											focus:outline-none
+											[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none' // hide arrowkeys
+									value={insurance}
+									onChange={thousandSeparator(setInsurance)}
+								/> 
+								<span className="mx-2 inline-block shrink-0 pointer-events-none font-semibold opacity-50">VND</span>
+							</div>
+						</div>
+					</div>
+					
+					{/* Vung kinh te */}
+					<div className="flex flex-col gap-2">
+						<label className='text-base lg:text-xl font-bold mr-5'>Vùng kinh tế</label>
+						<select className='text-base lg:text-xl border rounded-lg p-1'>
+							<option>Vùng I</option>
+							<option>Vùng II</option>
+							<option>Vùng III</option>
+							<option>Vùng IV</option>
+						</select>
+					</div>
 
-                <div className="flex flex-col gap-2">
-                    <button 
-                        className='text-base lg:text-xl font-bold bg-(--dark-blue) rounded-lg text-(--white) p-2 w-1/2 mx-auto'
-                        type="submit">
-                        Tính thuế TNCN
-                    </button>
-                </div>
-            </form>
-        </div>
-    </section>
-  )
+					{/* Nguoi phu thuoc */}
+					<div className="flex flex-col gap-2">
+						<label htmlFor="salary" className='text-base lg:text-xl font-bold'>Số người phụ thuộc</label>
+						<input 
+							type="number" 
+							// id
+							className='border rounded-lg p-1 w-fit lg:w-auto [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
+						/>
+					</div>
+					
+					{/* Calculation button */}
+					<div className="flex flex-col gap-2">
+						<button 
+							className='text-base lg:text-xl font-bold bg-(--dark-blue) rounded-lg text-(--white) p-2 w-fit lg:w-1/2 mx-auto'>
+							Tính thuế TNCN
+						</button>
+					</div>
+				</form>
+			</div>
+		</section>
+	)
 }
 
 export default FormCards
