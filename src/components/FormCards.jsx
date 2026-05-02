@@ -1,9 +1,11 @@
 import React from 'react'
 import { useState } from 'react'
-import { FaMoneyBillAlt } from 'react-icons/fa'
+import { FaMoneyBill, FaUserGroup } from "react-icons/fa6";
+
 const FormCards = () => {
     const [salary, setSalary] = useState("")              // default value
     const [insurance, setInsurance] = useState("")
+	const [dependant, setDependant] = useState("")
     const [isEnabled, setIsEnabled] = useState(false)
 
     const thousandSeparator = (setValue) => (e) => {
@@ -20,7 +22,7 @@ const FormCards = () => {
 					<div className="flex flex-col gap-2">
 						<label htmlFor="salary" className='text-base lg:text-xl font-bold'>Lương gộp hàng tháng (Gross)</label>
 						<div className="border rounded-lg flex w-full lg:w-1/2 items-center">
-							<FaMoneyBillAlt className="inline shrink-0 text-base lg:text-xl text-(--dark-blue) my-auto mx-2"/>
+							<FaMoneyBill className="inline shrink-0 text-base lg:text-xl text-(--dark-blue) my-auto mx-2"/>
 							<input 
 								type="text" 
 								id="salary" 
@@ -42,7 +44,7 @@ const FormCards = () => {
 								type="radio" 
 								id="luongGross" 
 								name="baohiem" 
-								className='mr-2' 
+								className='mr-2 accent-(--dark-blue)' 
 								onChange={(e) => {setIsEnabled(!isEnabled)}}
 								defaultChecked
 							/>
@@ -55,16 +57,16 @@ const FormCards = () => {
 									type="radio" 
 									id="luongCustom" 
 									name="baohiem" 
-									className='mr-2'
+									className='mr-2 accent-(--dark-blue)'
 									onChange={(e) => {setIsEnabled(!isEnabled)}}
 								/>
 								<label htmlFor='luongCustom' className='text-base lg:text-xl'>Khác</label>
 							</div>
 
 							<div className={`border rounded-lg flex w-full lg:w-1/2 items-center
-								transition-all ${!isEnabled ? "bg-(--gray) opacity-70 pointer-events-none select-none" : ""}`}> {/* toggle div on/off */}
-								         
-								<FaMoneyBillAlt className="inline shrink-0 text-base lg:text-xl text-(--dark-blue) my-auto mx-2"/>
+								transition ${!isEnabled ? "bg-(--gray) opacity-70 pointer-events-none select-none" : ""}`} // toggle div on and off
+							>      
+								<FaMoneyBill className="inline shrink-0 text-base lg:text-xl text-(--dark-blue) my-auto mx-2"/>
 								<input 
 									type="text" 
 									id="insurance" 
@@ -83,7 +85,7 @@ const FormCards = () => {
 					{/* Vung kinh te */}
 					<div className="flex flex-col gap-2">
 						<label className='text-base lg:text-xl font-bold mr-5'>Vùng kinh tế</label>
-						<select className='text-base lg:text-xl border rounded-lg p-1'>
+						<select className='text-base lg:text-xl border rounded-lg p-1 w-full lg:w-1/2 focus:outline-none'>
 							<option>Vùng I</option>
 							<option>Vùng II</option>
 							<option>Vùng III</option>
@@ -94,11 +96,18 @@ const FormCards = () => {
 					{/* Nguoi phu thuoc */}
 					<div className="flex flex-col gap-2">
 						<label htmlFor="salary" className='text-base lg:text-xl font-bold'>Số người phụ thuộc</label>
-						<input 
-							type="number" 
-							// id
-							className='border rounded-lg p-1 w-fit lg:w-auto [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
-						/>
+						<div className="border rounded-lg flex w-full lg:w-1/2 items-center">
+							<FaUserGroup className="inline shrink-0 text-base lg:text-xl text-(--dark-blue) my-auto mx-2"/>
+							<input 
+								type="number" 
+								id="salary" 
+								className='rounded-lg flex-1 min-w-0 p-1 text-xl text-right focus:outline-none
+										[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none' // hide arrowkeys
+								value={dependant}
+								onChange={(e) => setDependant(e.target.value)}
+							/> 
+							<span className="mx-2 inline-block shrink-0 pointer-events-none font-semibold opacity-50">Người</span>
+						</div>
 					</div>
 					
 					{/* Calculation button */}
