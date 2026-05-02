@@ -19,7 +19,7 @@ const FormCards = () => {
 			<div className='my-15 mx-auto w-3/4 lg:w-2/3 border'>
 				<form className="mx-5 my-4 space-y-6" autoComplete="off">
 					{/* Salary input */}
-					<div className="flex flex-col gap-2">
+					<div className="flex flex-col gap-2 items-center">
 						<label htmlFor="salary" className='text-base lg:text-xl font-bold'>Lương gộp hàng tháng (Gross)</label>
 						<div className="border rounded-lg flex w-full lg:w-1/2 items-center">
 							<FaMoneyBill className="inline shrink-0 text-base lg:text-xl text-(--dark-blue) my-auto mx-2"/>
@@ -36,9 +36,9 @@ const FormCards = () => {
 					</div>
 
 					{/* Insurance fields */}
-					<div className="flex flex-col gap-2">
+					<div className="flex flex-col gap-2 items-center">
 						<label htmlFor="baohiem" className='text-base lg:text-xl font-bold'>Mức lương đóng bảo hiểm</label>
-						
+					
 						<div className="flex items-center gap-2">
 							<input 
 								type="radio" 
@@ -51,7 +51,6 @@ const FormCards = () => {
 							<label htmlFor='luongGross' className='text-base lg:text-xl'>Sử dụng lương gộp</label>
 						</div>
 						
-						<div className="flex flex-col gap-2">
 							<div className="flex items-center gap-2">
 								<input 
 									type="radio" 
@@ -79,11 +78,10 @@ const FormCards = () => {
 								/> 
 								<span className="mx-2 inline-block shrink-0 pointer-events-none font-semibold opacity-50">VND</span>
 							</div>
-						</div>
 					</div>
 					
 					{/* Vung kinh te */}
-					<div className="flex flex-col gap-2">
+					<div className="flex flex-col gap-2 items-center">
 						<label className='text-base lg:text-xl font-bold mr-5'>Vùng kinh tế</label>
 						<select className='text-base lg:text-xl border rounded-lg p-1 w-full lg:w-1/2 focus:outline-none'>
 							<option>Vùng I</option>
@@ -94,7 +92,7 @@ const FormCards = () => {
 					</div>
 
 					{/* Nguoi phu thuoc */}
-					<div className="flex flex-col gap-2">
+					<div className="flex flex-col gap-2 items-center">
 						<label htmlFor="salary" className='text-base lg:text-xl font-bold'>Số người phụ thuộc</label>
 						<div className="border rounded-lg flex w-full lg:w-1/2 items-center">
 							<FaUserGroup className="inline shrink-0 text-base lg:text-xl text-(--dark-blue) my-auto mx-2"/>
